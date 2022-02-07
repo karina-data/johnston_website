@@ -5,7 +5,7 @@ links:
   - label: LinkedIn
     url: "https://linkedin.com/"
   - label: GitHub
-    url: "https://github.com/"
+    url: "https://github.com/karina-data"
   - label: Email
     url: "mailto:karinajohnston@ucsb.edu"
 output:
@@ -13,4 +13,4 @@ output:
 site: distill::distill_website
 ---
  
-Insert abbreviated biography here.
+Karina Johnston has been a passionate scientific and community leader in the southern California region for more than 14 years, with an increasing level of responsibility culminating in her current position with The Bay Foundation (TBF) as Science Director and her current position with Loyola Marymount University (LMU) as Director of Programs for LMU’s Coastal Research Institute (CRI). She is currently directing multiple projects to research and restore coastal habitats, including beaches, dunes, and wetlands. 
