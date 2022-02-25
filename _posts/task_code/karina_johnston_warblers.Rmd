@@ -1,0 +1,230 @@
+---
+title: "Black-throated Blue Warblers"
+author: "Karina Johnston"
+date: "12/1/2021"
+output: 
+  html_document: 
+    theme: cerulean
+    code_folding: hide
+
+---
+
+```{r setup, include = TRUE, warning = FALSE, message = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+# Attach packages
+library(tidyverse)
+library(here)
+library(naniar)
+library(broom)
+library(GGally)
+library(kableExtra)
+library(modelsummary)
+library(equatiomatic)
+library(texreg)
+
+```
+
+
+```{r}
+# Read in the data
+
+warblers <- read_csv(here("data", "bt_warblers.csv")) %>% 
+
+# replace values of -99.99 in all columns with NA using naniar
+  replace_with_na(warblers, replace = list(bill_depth = -99.99,
+                                           bill_culmen = -99.99,
+                                           mass = -99.99,
+                                           tarsus1 = -99.99,
+                                           wing_r = -99.99))
+
+```
+
+### Introduction
+
+This report explored relationships of body measurements and encounter histories of black-throated blue warblers from Hubbard Brook Experimental Forest from 1986 - 2010 (Rodenhouse et al. 2019). These data were gathered as part of the Hubbard Brook Ecosystem Study. 
+
+Exploratory plots were created to evaluate the relationships between continuous variables, then multiple linear regression was used to explore the relationship between warbler mass (dependent variable) and other explanatory variables. 
+
+
+### Exploratory Analyses
+
+In this section, exploratory visualization graphs are created to view the data variables. The first is a faceted scatter plot of wing length (mm) versus bird mass (g), separated by sex and wrapped by age at capture (banding). The second is a scatter plot of tarsus length (mm) versus mass (g), separated by sex and faceted for elevation (location of sample plot). The third graph is a violin plot of mass separated by sex and age, and the fourth graph explores bill depth (mm) versus bill culmen length (mm). Lastly, the `ggpairs()` function is used to explore multiple relationships together for selected variables on a pairs plot.
+
+
+```{r}
+# Create exploratory graphs to visualize the data
+
+# first graph - wing length vs mass
+ggplot(data = warblers, aes(x = wing_r, 
+                            y = mass)) + # plot wing length vs mass
+  geom_point(aes(color = sex, 
+                 alpha = 0.5)) + # geometry scatterplot colored by sex
+  facet_wrap(~ age_banded) + # facet wrap by age
+  theme_bw() + # cleaner visualized theme
+  labs(x = "Wing Length (mm)", 
+       y = "Mass (g)") + # easier to interpret labels
+  guides(alpha = FALSE) # removes unnecessary legend
+
+# second graph - tarsus length versus mass
+ggplot(data = warblers, aes(x = tarsus1, 
+                            y = mass)) + # plot tarsus length vs mass
+  geom_point(aes(color = sex, 
+                 alpha = 0.5)) + # geometry scatterplot colored by sex
+  facet_wrap(~ elevation) + # facet wrap by elevation
+  theme_bw() + # cleaner visualized theme
+  labs(x = "Tarsus Length (mm)", 
+       y = "Mass (g)") + # easier to interpret labels
+  guides(alpha = FALSE) # removes unnecessary legend
+
+# third graph - violin plot of mass separated by sex and age
+ggplot(data = warblers, aes(x = age_banded, 
+                            y = mass)) +
+  geom_violin(aes(color = sex, # geometry violin colored by sex
+                  fill = sex)) +
+  theme_bw() + # cleaner visualized theme
+  labs(x = "Banded Age", # easier to interpret labels
+       y = "Mass (g)")
+
+# fourth graph - bill depth versus bill culmen
+ggplot(data = warblers, aes(x = bill_culmen, y = bill_depth)) +
+  geom_point(aes(color = sex)) + # scatterplot geometry colored by sex
+  facet_wrap(~ elevation) + # facet wrap by elevation
+  theme_bw() + # cleaner visualized theme
+  labs(x = "Bill Culmen (mm)", # easier to interpret labels
+       y = "Bill Depth (mm)")
+
+```
+
+```{r}
+# Use GGally::ggpairs() function to create pairs plot for full exploration
+
+warblers %>% 
+  select(sex, bill_depth:wing_r) %>% # select the variables
+  ggpairs(aes(color = sex, 
+              alpha = 0.5)) + # increase the transparency for better viewing
+  theme_classic() # cleaner to interpret
+```
+
+
+### Data Analyses - Multiple Linear Regression
+
+```{r, include = FALSE}
+# Multiple linear regression between bird mass (the dependent variable) and other recorded features (explanatory variables)
+
+# the following code creates the 8 multiple linear regression models with various combinations of variables
+warblers_lm <- lm(mass ~ wing_r + sex, data = warblers)
+warblers_lm2 <- lm(mass ~ wing_r + sex + age_banded, data = warblers)
+warblers_lm3 <- lm(mass ~ wing_r + tarsus1 + sex + age_banded, data = warblers)
+warblers_lm4 <- lm(mass ~ wing_r + tarsus1 + sex, data = warblers)
+warblers_lm5 <- lm(mass ~ wing_r + tarsus1 + bill_depth + sex, data = warblers)
+warblers_lm6 <- lm(mass ~ wing_r + bill_depth + sex, data = warblers)
+warblers_lm7 <- lm(mass ~ wing_r + bill_culmen + sex, data = warblers)
+warblers_lm8 <- lm(mass ~ wing_r + tarsus1 + bill_culmen + sex, data = warblers)
+
+# Output the Akaike information criterion (AIC) as an estimate of relative quality of the models
+AIC(warblers_lm)
+AIC(warblers_lm2)
+AIC(warblers_lm3)
+AIC(warblers_lm4)
+AIC(warblers_lm5)
+AIC(warblers_lm6)
+AIC(warblers_lm7)
+AIC(warblers_lm8)
+
+```
+
+
+```{r, include = FALSE}
+# Explore diagnostics to show relationships w/ residuals, etc.
+# note: intentionally NOT included in final .html
+
+# to view the results from the 8 models next to each other 
+modelsummary(list(warblers_lm, warblers_lm2, warblers_lm3, 
+             warblers_lm4, warblers_lm5, warblers_lm6, 
+             warblers_lm7, warblers_lm8))
+
+# to view the diagnostics from the selected model
+plot(warblers_lm8)
+
+```
+
+Table 1 displays a finalized multiple linear regression model using black-throated blue warbler mass as the dependent variable. Eight multiple linear regression models were evaluated for best fit. 
+
+<br>
+
+```{r}
+# Finalized regression table
+
+caption <- "Table 1. Finalized warbler multiple linear regression model using bird mass (g) as the dependent variable (Data: Rodenhouse et al. 2019)."
+
+final_table <- modelsummary(list(warblers_lm8), # create a new df for the final table
+                            output = "kableExtra",
+                            title = caption,
+                            stars = TRUE, # adds stars for the p-value
+
+                            # renames the coefficients to be more meaningful
+                            coef_rename = c("(Intercept)" = "Intercept",
+                                            "wing_r" = "Right Wing Length (mm)",
+                                            "tarsus1" = "Tarsus Length (mm)",
+                                            "bill_culmen" = "Bill Length (mm)",
+                                            "sexM" = "Sex (Male)")
+                            )
+
+final_table # output the table
+
+```
+
+
+<br>
+
+Eight models were evaluated, with the final selected model having the lowest Akaike information criterion (AIC) value (`r round(AIC(warblers_lm8),2)`) as compared to the seven other models evaluated (e.g., model 1: `r round(AIC(warblers_lm),2)`), which means the selected model was the best match of model fit and lowered complexity. Though it was the best fit of the models evaluated, it is still ultimately wrong because all models are wrong.
+
+When evaluating the model diagnostics for the selected model, there was one outlier, but it was not outside the Cook's distance on the residuals versus leverage plot. The quantile-quantile plot appeared normally distributed (fairly linear, with the exception of the outlier), and the data appeared homoscedastic (represented by an even vertical distribution of the residuals). 
+
+The final multiple linear regression model selected is presented in Equation 1: 
+
+```{r}
+# Use equatiomatic to output the selected regression model
+
+extract_eq(model = warblers_lm8, use_coefs = TRUE)
+```
+
+
+```{r, include = FALSE}
+# to output the summary model information for ease of interpretation
+# note: intentionally NOT included in the final .html
+
+summary(warblers_lm8)
+warblers_lm8_glance <- glance(warblers_lm8)
+```
+
+<br>
+
+The final variables selected include wing length (mm), tarsus length (mm), bill length (mm), and sex. Each of these may influence bird mass, e.g., sex-dependent weight variability between males and females (sexual dimorphism). Bill depth (mm) was not selected because it may not be independent of bill length, and bill length was a better fit in the model, based on the AIC results. Each of the size variables may matter in food selection and/or capture (warblers are partial insectivores), which may ultimately influence bird mass. The final model explained `r (round(warblers_lm8_glance$adj.r.squared, 3)*100)`% of the variance in the outcome variable [bird mass (g)] with an adjusted R^2^ value of `r round(warblers_lm8_glance$adj.r.squared, 3)` (Multiple linear regression, F(`r round(warblers_lm8_glance$df)`) = `r round(warblers_lm8_glance$statistic, 2)`, *p* `r ifelse(warblers_lm8_glance$p.value < 0.001, paste("< 0.001"), paste("=", warblers_lm8_glance$p.value))`).
+
+Regression model coefficient interpretation:
+
+- If everything else is constant, on average for every 1 mm increase in wing length, we expect warbler body mass to increase by `r round(warblers_lm8$coefficients[2], 3)` grams.
+- If everything else is constant, on average for every 1 mm increase in tarsus length, we expect warbler body mass to increase by `r round(warblers_lm8$coefficients[3], 3)` grams.
+- If everything else is constant, on average for every 1 mm increase in bill length, we expect warbler body mass to increase by `r round(warblers_lm8$coefficients[4], 3)` grams.
+- If everything else is constant, on average we expect the male warblers to have a mass `r round(warblers_lm8$coefficients[5], 3)` grams less than the female warblers (female is the reference level in this model).
+
+
+### Citations
+
+R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
+
+Robinson, David, Alex Hayes and Simon Couch (2021). broom: Convert Statistical Objects into Tidy Tibbles. R package version 0.7.10. https://CRAN.R-project.org/package=broom
+
+Rodenhouse, N., R. Holmes, S. Sillett, and M. Webster. 2019. Black-throated Blue Warbler capture histories, Hubbard Brook Experimental Forest, 1986 - 2010 ver 4. Environmental Data Initiative. https://doi.org/10.6073/pasta/ea985022acfdb76cd7beeaf8da6c39b1
+
+Schloerke, Barret, Di Cook, Joseph Larmarange, Francois Briatte, Moritz Marbach, Edwin Thoen, Amos Elberg and Jason Crowley (2021). GGally: Extension to 'ggplot2'. R package version 2.1.2. https://CRAN.R-project.org/package=GGally
+
+Tierney, Nicholas, Di Cook, Miles McBain and Colin Fay (2021). naniar: Data Structures, Summaries, and Visualizations for Missing Data. R package version 0.6.1. https://CRAN.R-project.org/package=naniar
+
+Wickham, H. et al., (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686, https://doi.org/10.21105/joss.01686
+
+Zhu, H. (2021). kableExtra: Construct Complex Table with 'kable' and Pipe Syntax. R package version 1.3.4. https://CRAN.R-project.org/package=kableExtra
+
+

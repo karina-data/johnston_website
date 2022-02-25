@@ -7,8 +7,11 @@ output: html_document
 In this blog, I provide several examples of coding to showcase different types of visualizations and analyses. Additional coding examples are available upon request. 
 
 Example 1: Snowshoe Hare Report
+
 Example 2: Farmer Perceptions of Climate Change
+
 Example 3: Mono Lake Data Visualization Example
+
 Example 4: Black-Throated Blue Warblers
 
 
