@@ -7,14 +7,14 @@ description: |
 ```{r setup, include = FALSE, warnings = FALSE, message = FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
-<a href = “K.Johnston_CV_Jan2022.pdf” target = “_blank” > Click here for a full CV PDF</a>
+#<a href = “K.Johnston_CV_Jan2022.pdf” target = “_blank” > Click here for a full CV PDF</a>
 
 ```
 
 
 ## Interests and Experience
 
-Karina Johnston has been a passionate scientific and community leader in the southern California region for more than 14 years, with an increasing level of responsibility culminating in her current position with The Bay Foundation (TBF) as Science Director and her current position with Loyola Marymount University (LMU) as Director of Programs for LMU’s Coastal Research Institute (CRI). Karina leads her department at TBF by developing, managing, and implementing federal, state, and non-profit grants to help execute the strategic plan for the Santa Monica Bay National Estuary Program, which strives to clean up waterways and create healthy habitats in the Los Angeles region. She is currently directing multiple projects to research and restore coastal habitats, including beaches, dunes, and wetlands. Career ecological restoration highlights include project implementation and leading the scientific monitoring programs for the Malibu Lagoon Restoration and Enhancement Project, the Santa Monica Beach Restoration Pilot Project, several other Living Shoreline Projects, and contributing significantly to environmental planning (CEQA/NEPA) for the Ballona Wetlands Restoration Project (577 acres).
+Karina Johnston has been a passionate scientific and community leader in the southern California region for more than 14 years, with an increasing level of responsibility culminating in her current position with The Bay Foundation as Science Director and her current position with Loyola Marymount University as Director of Programs for LMU’s Coastal Research Institute. Karina leads her department at TBF by developing, managing, and implementing federal, state, and non-profit grants to help execute the strategic plan for the Santa Monica Bay National Estuary Program, which strives to clean up waterways and create healthy habitats in the Los Angeles region. She is currently directing multiple projects to research and restore coastal habitats, including beaches, dunes, and wetlands. Career ecological restoration highlights include project implementation and leading the scientific monitoring programs for the Malibu Lagoon Restoration and Enhancement Project, the Santa Monica Beach Restoration Pilot Project, several other Living Shoreline Projects, and contributing significantly to environmental planning (CEQA/NEPA) for the Ballona Wetlands Restoration Project (577 acres).
 
 As CRI’s Director of Programs, she developed and oversees the internship and faculty fellowship programs, conducts research, and teaches in Environmental Science. Current research fields include coastal ecology, coastal resiliency, restoration ecology, and water quality. In 2021, Karina won the Part Time Faculty Distinguished Teaching Award from LMU for her teaching and research service.
 

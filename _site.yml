@@ -1,7 +1,7 @@
 name: "."
 title: "Karina Johnston"
 description: |
-  Test Website
+  Website
 output_dir: "docs"
 navbar:
   right:
