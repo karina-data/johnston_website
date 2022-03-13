@@ -1,0 +1,173 @@
+---
+title: "Santa Barbara LTER Urchins"
+description: |
+  This report analyzes sea urchin data from the Santa Barbara Coastal Long Term Ecological Research program.
+author:
+  - name: Karina Johnston
+    url: {}
+date: 2022-03-13
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: yes
+    code_folding: hide
+---
+
+This report analyzes sea urchin data from the Santa Barbara Coastal Long Term Ecological Research program. Data for both red (*Mesocentrotus franciscanus*) and purple (*Strongylocentrotus purpuratus*) urchins observed at five sites along the Santa Barbara coast are analyzed. Final Figures and Tables are produced, exploring data visualization techniques and summary statistics. 
+
+Citation: Reed, D. 2020. SBC LTER: Reef: Long-term experiment: Kelp removal: Urchin size frequency distribution ver 20. Environmental Data Initiative. Accessed 2010-10-27. (https://doi.org/10.6073/pasta/5a1e9ef03aa47bd2225c0bb98a02a63b)
+
+
+```{r setup, include = TRUE, warning = FALSE, message = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+# Attach the following packages into the setup code chunk and change the settings for reporting warnings and messages (above)
+library(tidyverse)
+library(kableExtra)
+library(here)
+library(janitor)
+library(lubridate)
+```
+
+### Read in the data
+
+This step reads in the urchin data .csv file from within the project folder and creates a new dataframe `urchin_data`, followed by a step to change the column headers to lower snake case using the function `clean_names()` found in the `janitor` package.
+
+```{r}
+urchin_data <- read_csv(here("data", "urchins.csv")) %>% 
+  clean_names()
+```
+
+### Section 1: Size comparisons (all data)
+
+In this section, the data will be visualized first by comparing the distributions of sizes between purple and red urchins with a finalized, faceted histogram using the `ggplot()` function with cleaned up aesthetics. 
+
+```{r, fig.cap = "Figure 1. Diameter size frequency data (cm) for Santa Barbara coastal red and purple urchins (data: SBC LTER)."}
+
+# creates a histogram based on urchin size and changes the bar colors based on the species
+ggplot(data = urchin_data, aes(x = size, fill = common_name)) + 
+
+# geometry for histogram and changes bin number to better represent the data
+  geom_histogram(bins = 13, color = "black") + 
+  
+# fills the bins with colors corresponding to species
+  scale_fill_manual(values = c("Purple", "Red")) + 
+  facet_wrap(~ common_name) + # splits graph by species
+  labs(x = "Diameter (cm)", # updates titles
+       y = "Number of urchins", 
+       title = "Size Frequency Histogram for Santa Barbara Urchins (Johnston)") +
+  theme_bw() + # cleaner graph
+  theme(plot.title = element_text(hjust = 0.5), # centered title
+        panel.grid = element_blank()) + # removes gridlines
+  
+  guides(fill = FALSE) # removes unnecessary legend
+```
+
+Next, a finalized summary table is created that contains the following statistics for purple and red urchins (mean, standard deviation or SD, and sample size). This code contains many aesthetic alterations for cleaner visibility and labeling, including updated column header names, adding comma separators for thousands, adding a caption, and rounding the digits.
+
+```{r}
+urchin_size_stats <- urchin_data %>% 
+
+# these functions group by species and produce the summary statistics (rounded)
+  group_by(common_name) %>% 
+  summarize(mean_size_cm = round(mean(size), 2),
+            median_size_cm = round(median(size), 1),
+            sd_size = round(sd(size), 2),
+            sample_size = n())
+
+# these functions update the table to be cleaner, easier to read, and visually appealing
+kable(urchin_size_stats,
+      col.names = c("Common Name", # changes the column names
+                    "Mean Diameter (cm)", 
+                    "Median Diameter (cm)",
+                    "Standard Deviation (cm)",
+                    "Sample Size"),
+      align = "lcccc", # changes the alignment of the columns
+      format.args = list(big.mark = ","), # adds comma separator
+
+# adds a caption
+      caption = "Table 1. Summary statistics for red and purple urchins on the Santa Barbara coast (Johnston) (data: SBC LTER).") %>% 
+
+# better lines within the table
+kable_classic(full_width = F)
+```
+
+Based on the urchin size data visualizations in Figure 1 and the summary statistics presented in Table 1, several patterns emerge about the urchin size data. The central tendency and data spread of urchin size by species (mean $\pm$ SD) showed larger red urchins (6.78 $\pm$ 1.89) than purple urchins (4.47 $\pm$ 1.18); the mean of red urchins was 34% larger than purples. The median showed a similar pattern (7.0 and 4.5, respectively). Both sample sizes were quite large (> 27,000 individual urchins for each). From the histogram visualization (Figure 1), both species of urchins appear to be normally distributed.    
+
+
+### Section 2: Purple urchins (by site and year)
+
+In this Section, the purple urchin data will be explored by site and year. In this code chunk, the data are filtered for purple urchins, date is converted to class "Date", and new columns are added.
+
+```{r}
+# creates the new dataframe beginning with urchin_data
+purple_urchins <- urchin_data %>% 
+  filter(common_name == "Purple Urchin") %>% # filters only purple rows
+
+# updates the date column to be Date format and adds a year column 
+  mutate(date = mdy(date)) %>% 
+  mutate(year = year(date)) %>% 
+
+# adds a new column called "site_full" that includes the full site names
+  mutate(site_full = case_when(
+    site == "NAPL" ~ "Naples Reef",
+    site == "AQUE" ~ "Arroyo Quemado Reef",
+    site == "CARP" ~ "Carpinteria Reef",
+    site == "MOHK" ~ "Mohawk Reef",
+    site == "IVEE" ~ "Isla Vista Reef"
+  ))
+
+```
+
+This code stores a table (`purple_urchin_summary`) containing the total number of purple urchins observed by site and year (not a final formatted table). 
+
+```{r}
+purple_urchin_summary <- purple_urchins %>% 
+  count(site_full, year)
+
+```
+
+#### Visualizing the data
+
+This step visualizes the data through a final graph showing counts of purple urchins recorded at each site over time for the years included in the study. 
+
+```{r, fig.cap = "Figure 2. Purple urchin counts by site in Santa Barbara, 2008-2020 (data: SBC LTER)."}
+
+# creates a bar graph (column geometry) using purple_urchin_summary dataframe and fills the color by site name
+ggplot(data = purple_urchin_summary, aes(x = year, y = n, fill = site_full)) +
+  geom_col(color = "black") +
+
+# updates the axes/title names
+  labs(x = "Year", y = "Urchin Count",
+       title = "Purple urchin count by site over time (Johnston)") +
+
+# wraps by site (splits the graph)
+  facet_wrap(~ site_full) +
+  theme_bw() + # cleaner theme
+  theme(plot.title = element_text(hjust = 0.5), # centers title
+        panel.grid.minor = element_blank() # removes major gridlines
+        ) +
+
+# changes fill colors to be more aesthetic
+  scale_fill_manual(values = c("purple", "blue", 
+                               "dark green", "dark red", "orange")) +
+
+# removes unnecessary legend
+  guides(fill = FALSE)
+```
+
+
+The purple urchin counts drop consistently across all sites in 2013, with a continuing decline through 2020, though at some sites, the 2020 counts are similar to the initial baseline survey year in 2008. The decline may not be reflective of urchin population changes. Other factors that would be important to determining actual changes in population sizes include sample size and effect, number or types of treatments, etc. Since these are reflective of kelp removal data, it may be that there is a confounding factor that is not acknowledged in these data based on the merging of all treatments together. There could also be changes in sampling effort across years that would affect the total counts (e.g., Covid-19 may have reduced survey frequency in 2020).
+
+
+### Citations
+
+Firke, Sam (2021). janitor: Simple Tools for Examining and Cleaning Dirty Data. R package version 2.1.0. https://CRAN.R-project.org/package=janitor
+
+Grolemund, Garrett, Hadley Wickham (2011). Dates and Times Made Easy with lubridate. Journal of Statistical Software, 40(3), 1-25. URL https://www.jstatsoft.org/v40/i03/.
+
+Reed, D. 2020. SBC LTER: Reef: Long-term experiment: Kelp removal: Urchin size frequency distribution ver 20. Environmental Data Initiative. Accessed 2010-10-27. (https://doi.org/10.6073/pasta/5a1e9ef03aa47bd2225c0bb98a02a63b)
+
+Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686, https://doi.org/10.21105/joss.01686
+
+Zhu, Hao (2021). kableExtra: Construct Complex Table with 'kable' and Pipe Syntax. R package version 1.3.4. https://CRAN.R-project.org/package=kableExtra

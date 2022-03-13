@@ -87,638 +87,39 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>Karina Johnston: Curriculum Vitae</title>
+  <title>Sierra Amphibians Visualization</title>
 
-  <meta property="description" itemprop="description" content="Professional information about Karina"/>
+  <meta property="description" itemprop="description" content="This report creates a final visualization (two-part graph) of frog count data for the mountain yellow-legged frog using Sierra Lakes Inventory Project data."/>
 
 
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2022-03-13"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-03-13"/>
+  <meta name="article:author" content="Karina Johnston"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Karina Johnston: Curriculum Vitae"/>
+  <meta property="og:title" content="Sierra Amphibians Visualization"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Professional information about Karina"/>
+  <meta property="og:description" content="This report creates a final visualization (two-part graph) of frog count data for the mountain yellow-legged frog using Sierra Lakes Inventory Project data."/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Karina Johnston"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Karina Johnston: Curriculum Vitae"/>
-  <meta property="twitter:description" content="Professional information about Karina"/>
+  <meta property="twitter:title" content="Sierra Amphibians Visualization"/>
+  <meta property="twitter:description" content="This report creates a final visualization (two-part graph) of frog count data for the mountain yellow-legged frog using Sierra Lakes Inventory Project data."/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Curriculum Vitae"]},{"type":"character","attributes":{},"value":["Professional information about Karina"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Sierra Amphibians Visualization"]},{"type":"character","attributes":{},"value":["This report creates a final visualization (two-part graph) of frog count data for the mountain yellow-legged frog using Sierra Lakes Inventory Project data.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Karina Johnston"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["2022-03-13"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","toc","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["hide"]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["amphibians_files/anchor-4.2.2/anchor.min.js","amphibians_files/bowser-1.9.3/bowser.min.js","amphibians_files/distill-2.2.21/template.v2.js","amphibians_files/figure-html5/unnamed-chunk-6-1.png","amphibians_files/header-attrs-2.11/header-attrs.js","amphibians_files/jquery-3.6.0/jquery-3.6.0.js","amphibians_files/jquery-3.6.0/jquery-3.6.0.min.js","amphibians_files/jquery-3.6.0/jquery-3.6.0.min.map","amphibians_files/popper-2.6.0/popper.min.js","amphibians_files/tippy-6.2.7/tippy-bundle.umd.min.js","amphibians_files/tippy-6.2.7/tippy-light-border.css","amphibians_files/tippy-6.2.7/tippy.css","amphibians_files/tippy-6.2.7/tippy.umd.min.js","amphibians_files/webcomponents-2.0.0/webcomponents.js"]}
+  </script>
   <!--radix_placeholder_navigation_in_header-->
-  <meta name="distill:offset" content=""/>
-
-  <script type="application/javascript">
-
-    window.headroom_prevent_pin = false;
-
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-
-      // initialize headroom for banner
-      var header = $('header').get(0);
-      var headerHeight = header.offsetHeight;
-      var headroom = new Headroom(header, {
-        tolerance: 5,
-        onPin : function() {
-          if (window.headroom_prevent_pin) {
-            window.headroom_prevent_pin = false;
-            headroom.unpin();
-          }
-        }
-      });
-      headroom.init();
-      if(window.location.hash)
-        headroom.unpin();
-      $(header).addClass('headroom--transition');
-
-      // offset scroll location for banner on hash change
-      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
-      window.addEventListener("hashchange", function(event) {
-        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
-      });
-
-      // responsive menu
-      $('.distill-site-header').each(function(i, val) {
-        var topnav = $(this);
-        var toggle = topnav.find('.nav-toggle');
-        toggle.on('click', function() {
-          topnav.toggleClass('responsive');
-        });
-      });
-
-      // nav dropdowns
-      $('.nav-dropbtn').click(function(e) {
-        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
-        $(this).parent().siblings('.nav-dropdown')
-           .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $("body").click(function(e){
-        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $(".nav-dropdown").click(function(e){
-        e.stopPropagation();
-      });
-    });
-  </script>
-
-  <style type="text/css">
-
-  /* Theme (user-documented overrideables for nav appearance) */
-
-  .distill-site-nav {
-    color: rgba(255, 255, 255, 0.8);
-    background-color: #0F2E3D;
-    font-size: 15px;
-    font-weight: 300;
-  }
-
-  .distill-site-nav a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .distill-site-nav a:hover {
-    color: white;
-  }
-
-  @media print {
-    .distill-site-nav {
-      display: none;
-    }
-  }
-
-  .distill-site-header {
-
-  }
-
-  .distill-site-footer {
-
-  }
-
-
-  /* Site Header */
-
-  .distill-site-header {
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 3;
-  }
-
-  .distill-site-header .nav-left {
-    display: inline-block;
-    margin-left: 8px;
-  }
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header .nav-left {
-      margin-left: 0;
-    }
-  }
-
-
-  .distill-site-header .nav-right {
-    float: right;
-    margin-right: 8px;
-  }
-
-  .distill-site-header a,
-  .distill-site-header .title {
-    display: inline-block;
-    text-align: center;
-    padding: 14px 10px 14px 10px;
-  }
-
-  .distill-site-header .title {
-    font-size: 18px;
-    min-width: 150px;
-  }
-
-  .distill-site-header .logo {
-    padding: 0;
-  }
-
-  .distill-site-header .logo img {
-    display: none;
-    max-height: 20px;
-    width: auto;
-    margin-bottom: -4px;
-  }
-
-  .distill-site-header .nav-image img {
-    max-height: 18px;
-    width: auto;
-    display: inline-block;
-    margin-bottom: -3px;
-  }
-
-
-
-  @media screen and (min-width: 1000px) {
-    .distill-site-header .logo img {
-      display: inline-block;
-    }
-    .distill-site-header .nav-left {
-      margin-left: 20px;
-    }
-    .distill-site-header .nav-right {
-      margin-right: 20px;
-    }
-    .distill-site-header .title {
-      padding-left: 12px;
-    }
-  }
-
-
-  .distill-site-header .nav-toggle {
-    display: none;
-  }
-
-  .nav-dropdown {
-    display: inline-block;
-    position: relative;
-  }
-
-  .nav-dropdown .nav-dropbtn {
-    border: none;
-    outline: none;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 16px 10px;
-    background-color: transparent;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    margin: 0;
-    margin-top: 1px;
-    z-index: 2;
-  }
-
-  .nav-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 200px;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 4px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
-    z-index: 1;
-    margin-top: 2px;
-    white-space: nowrap;
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
-
-  .nav-dropdown-content hr {
-    margin-top: 4px;
-    margin-bottom: 4px;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-dropdown-active {
-    display: block;
-  }
-
-  .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
-    color: black;
-    padding: 6px 24px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-
-  .nav-dropdown-content .nav-dropdown-header {
-    display: block;
-    padding: 5px 24px;
-    padding-bottom: 0;
-    text-transform: uppercase;
-    font-size: 14px;
-    color: #999999;
-    white-space: nowrap;
-  }
-
-  .nav-dropdown:hover .nav-dropbtn {
-    color: white;
-  }
-
-  .nav-dropdown-content a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-
-  .nav-right .nav-dropdown-content {
-    margin-left: -45%;
-    right: 0;
-  }
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
-    .distill-site-header a.nav-toggle {
-      float: right;
-      display: block;
-    }
-    .distill-site-header .title {
-      margin-left: 0;
-    }
-    .distill-site-header .nav-right {
-      margin-right: 0;
-    }
-    .distill-site-header {
-      overflow: hidden;
-    }
-    .nav-right .nav-dropdown-content {
-      margin-left: 0;
-    }
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header.responsive {position: relative; min-height: 500px; }
-    .distill-site-header.responsive a.nav-toggle {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    .distill-site-header.responsive a,
-    .distill-site-header.responsive .nav-dropdown {
-      display: block;
-      text-align: left;
-    }
-    .distill-site-header.responsive .nav-left,
-    .distill-site-header.responsive .nav-right {
-      width: 100%;
-    }
-    .distill-site-header.responsive .nav-dropdown {float: none;}
-    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
-    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
-      display: block;
-      width: 100%;
-      text-align: left;
-    }
-  }
-
-  /* Site Footer */
-
-  .distill-site-footer {
-    width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-    z-index: 3;
-    margin-top: 30px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    text-align: center;
-  }
-
-  /* Headroom */
-
-  d-title {
-    padding-top: 6rem;
-  }
-
-  @media print {
-    d-title {
-      padding-top: 4rem;
-    }
-  }
-
-  .headroom {
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
-  .headroom--transition {
-    transition: all .4s ease-in-out;
-  }
-
-  .headroom--unpinned {
-    top: -100px;
-  }
-
-  .headroom--pinned {
-    top: 0;
-  }
-
-  /* adjust viewport for navbar height */
-  /* helps vertically center bootstrap (non-distill) content */
-  .min-vh-100 {
-    min-height: calc(100vh - 100px) !important;
-  }
-
-  </style>
-
-  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
-  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
-  <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
-  <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
-
-  <script type="application/javascript">
-
-  function getMeta(metaName) {
-    var metas = document.getElementsByTagName('meta');
-    for (let i = 0; i < metas.length; i++) {
-      if (metas[i].getAttribute('name') === metaName) {
-        return metas[i].getAttribute('content');
-      }
-    }
-    return '';
-  }
-
-  function offsetURL(url) {
-    var offset = getMeta('distill:offset');
-    return offset ? offset + '/' + url : url;
-  }
-
-  function createFuseIndex() {
-
-    // create fuse index
-    var options = {
-      keys: [
-        { name: 'title', weight: 20 },
-        { name: 'categories', weight: 15 },
-        { name: 'description', weight: 10 },
-        { name: 'contents', weight: 5 },
-      ],
-      ignoreLocation: true,
-      threshold: 0
-    };
-    var fuse = new window.Fuse([], options);
-
-    // fetch the main search.json
-    return fetch(offsetURL('search.json'))
-      .then(function(response) {
-        if (response.status == 200) {
-          return response.json().then(function(json) {
-            // index main articles
-            json.articles.forEach(function(article) {
-              fuse.add(article);
-            });
-            // download collections and index their articles
-            return Promise.all(json.collections.map(function(collection) {
-              return fetch(offsetURL(collection)).then(function(response) {
-                if (response.status === 200) {
-                  return response.json().then(function(articles) {
-                    articles.forEach(function(article) {
-                      fuse.add(article);
-                    });
-                  })
-                } else {
-                  return Promise.reject(
-                    new Error('Unexpected status from search index request: ' +
-                              response.status)
-                  );
-                }
-              });
-            })).then(function() {
-              return fuse;
-            });
-          });
-
-        } else {
-          return Promise.reject(
-            new Error('Unexpected status from search index request: ' +
-                        response.status)
-          );
-        }
-      });
-  }
-
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-
-    // get search element (bail if we don't have one)
-    var searchEl = window.document.getElementById('distill-search');
-    if (!searchEl)
-      return;
-
-    createFuseIndex()
-      .then(function(fuse) {
-
-        // make search box visible
-        searchEl.classList.remove('hidden');
-
-        // initialize autocomplete
-        var options = {
-          autoselect: true,
-          hint: false,
-          minLength: 2,
-        };
-        window.autocomplete(searchEl, options, [{
-          source: function(query, callback) {
-            const searchOptions = {
-              isCaseSensitive: false,
-              shouldSort: true,
-              minMatchCharLength: 2,
-              limit: 10,
-            };
-            var results = fuse.search(query, searchOptions);
-            callback(results
-              .map(function(result) { return result.item; })
-            );
-          },
-          templates: {
-            suggestion: function(suggestion) {
-              var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
-                ? `<img src="${offsetURL(suggestion.preview)}"</img>`
-                : '';
-              var html = `
-                <div class="search-item">
-                  <h3>${suggestion.title}</h3>
-                  <div class="search-item-description">
-                    ${suggestion.description || ''}
-                  </div>
-                  <div class="search-item-preview">
-                    ${img}
-                  </div>
-                </div>
-              `;
-              return html;
-            }
-          }
-        }]).on('autocomplete:selected', function(event, suggestion) {
-          window.location.href = offsetURL(suggestion.path);
-        });
-        // remove inline display style on autocompleter (we want to
-        // manage responsive display via css)
-        $('.algolia-autocomplete').css("display", "");
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-
-  });
-
-  </script>
-
-  <style type="text/css">
-
-  .nav-search {
-    font-size: x-small;
-  }
-
-  /* Algolioa Autocomplete */
-
-  .algolia-autocomplete {
-    display: inline-block;
-    margin-left: 10px;
-    vertical-align: sub;
-    background-color: white;
-    color: black;
-    padding: 6px;
-    padding-top: 8px;
-    padding-bottom: 0;
-    border-radius: 6px;
-    border: 1px #0F2E3D solid;
-    width: 180px;
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-nav .algolia-autocomplete {
-      display: none;
-      visibility: hidden;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete {
-      display: inline-block;
-      visibility: visible;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
-      margin-left: 0;
-      width: 400px;
-      max-height: 400px;
-    }
-  }
-
-  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
-    width: 90%;
-    outline: none;
-    border: none;
-  }
-
-  .algolia-autocomplete .aa-hint {
-    color: #999;
-  }
-  .algolia-autocomplete .aa-dropdown-menu {
-    width: 550px;
-    max-height: 70vh;
-    overflow-x: visible;
-    overflow-y: scroll;
-    padding: 5px;
-    margin-top: 3px;
-    margin-left: -150px;
-    background-color: #fff;
-    border-radius: 5px;
-    border: 1px solid #999;
-    border-top: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-    cursor: pointer;
-    padding: 5px 4px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
-    border-bottom: none;
-    margin-bottom: 2px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
-    overflow: hidden;
-    font-size: 0.8em;
-    line-height: 1.4em;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
-    font-size: 1rem;
-    margin-block-start: 0;
-    margin-block-end: 5px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
-    display: inline-block;
-    overflow: hidden;
-    height: 2.8em;
-    width: 80%;
-    margin-right: 4%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
-    display: inline-block;
-    width: 15%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
-    height: 3em;
-    width: auto;
-    display: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
-    display: initial;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-    background-color: #eee;
-  }
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
-    font-weight: bold;
-    font-style: normal;
-  }
-
-  </style>
-
-
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -2037,15 +1438,16 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
-  <script src="site_libs/popper-2.6.0/popper.min.js"></script>
-  <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
-  <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
-  <script src="site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
-  <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
-  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
-  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
-  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <script src="amphibians_files/header-attrs-2.11/header-attrs.js"></script>
+  <script src="amphibians_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <script src="amphibians_files/popper-2.6.0/popper.min.js"></script>
+  <link href="amphibians_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="amphibians_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="amphibians_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="amphibians_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="amphibians_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="amphibians_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="amphibians_files/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
   <!--/radix_placeholder_site_in_header-->
 
@@ -2057,91 +1459,204 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Curriculum Vitae","description":"Professional information about Karina","authors":[]}
+{"title":"Sierra Amphibians Visualization","description":"This report creates a final visualization (two-part graph) of frog count data for the mountain yellow-legged frog using Sierra Lakes Inventory Project data.","authors":[{"author":"Karina Johnston","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2022-03-13T00:00:00.000-08:00","citationText":"Johnston, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
 <!--radix_placeholder_navigation_before_body-->
-<header class="header header--fixed" role="banner">
-<nav class="distill-site-nav distill-site-header">
-<div class="nav-left">
-<a href="index.html" class="title">Karina Johnston</a>
-<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
-</div>
-<div class="nav-right">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<div class="nav-dropdown">
-<button class="nav-dropbtn">
-Portfolio
- 
-<span class="down-arrow">&#x25BE;</span>
-</button>
-<div class="nav-dropdown-content">
-<a href="blog.html">Example Coding Reports</a>
-<a href="data_viz.html">Data Visualizations</a>
-<a href="projects.html">Restoration Projects</a>
-</div>
-</div>
-<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
-</div>
-</nav>
-</header>
 <!--/radix_placeholder_navigation_before_body-->
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Curriculum Vitae</h1>
+<h1>Sierra Amphibians Visualization</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Professional information about Karina</p></p>
+<p><p>This report creates a final visualization (two-part graph) of frog count data for the mountain yellow-legged frog using Sierra Lakes Inventory Project data.</p></p>
 </div>
 
+<div class="d-byline">
+  Karina Johnston true 
+  
+<br/>2022-03-13
+</div>
 
 <div class="d-article">
-<p><a href=“cv.pdf” target = “_blank”>Click here for a full CV (pdf)</a></p>
-<h2 id="interests-and-experience">Interests and Experience</h2>
-<p>Karina Johnston has been a passionate scientific and community leader in the southern California region for more than 14 years, with an increasing level of responsibility culminating in her current position with The Bay Foundation as Science Director and her current position with Loyola Marymount University as Director of Programs for LMU’s Coastal Research Institute. Karina leads her department at TBF by developing, managing, and implementing federal, state, and non-profit grants to help execute the strategic plan for the Santa Monica Bay National Estuary Program, which strives to clean up waterways and create healthy habitats in the Los Angeles region. She is currently directing multiple projects to research and restore coastal habitats, including beaches, dunes, and wetlands. Career ecological restoration highlights include project implementation and leading the scientific monitoring programs for the Malibu Lagoon Restoration and Enhancement Project, the Santa Monica Beach Restoration Pilot Project, several other Living Shoreline Projects, and contributing significantly to environmental planning (CEQA/NEPA) for the Ballona Wetlands Restoration Project (577 acres).</p>
-<p>As CRI’s Director of Programs, she developed and oversees the internship and faculty fellowship programs, conducts research, and teaches in Environmental Science. Current research fields include coastal ecology, coastal resiliency, restoration ecology, and water quality. In 2021, Karina won the Part Time Faculty Distinguished Teaching Award from LMU for her teaching and research service.</p>
-<p>Karina is recently finished leading the multi-year public process to perform major revisions to regional strategic plans, including a revised Comprehensive Monitoring Program and Climate Action Plan for the region. Karina is also a Board Certified Environmental Scientist, with a Biology specialty and is a Certified Ecological Restoration Practitioner (Society for Ecological Restoration). In 2021, Karina began a PhD program at UCSB in Environmental Science and aims to conduct research relating to ecological and physical trajectories of beach restoration projects in southern California in partnership with her academic and community mentors.</p>
-<h2 id="publications-and-peer-reviewed-technical-documents-selected">Publications and Peer Reviewed Technical Documents (selected)</h2>
-<p>Burkhard, J, K Johnston, J Saez, and J Dorsey. Water Quality and Hydrological Benefits of a Natural Treatment System Installed in an Urban Watershed in Southern California. (submitted) Environmental Monitoring and Assessment.</p>
-<p>Rosenau, N, H Galavotti, et al., including K Johnston (2021). Integrating High-Resolution Coastal Acidification Monitoring Data Across Seven U.S. Estuaries. Frontiers in Marine Science, Vol. 8: 679913. DOI: 10.3389/fmars.2021.679913</p>
-<p>Johnston, K., C. Enyart, M. Jenkins, D. Lazarus, and S. Cuadra (2021). Santa Monica Beach Restoration Pilot Project: Year 5 Annual Report. Report prepared by The Bay Foundation for City of Santa Monica, California Coastal Commission, US Environmental Protection Agency, and California Department of Parks and Recreation. 118 pages.</p>
-<p>Johnston, K, C Enyart, M Jenkins, S Cuadra, and D Lazarus (2021). Los Angeles Living Shoreline Project Restoration and Monitoring Plan. Prepared by The Bay Foundation for the California Coastal Commission, Los Angeles County Department of Beaches and Harbors, City of Los Angeles, and State Coastal Conservancy. 72 pages.</p>
-<p>Grifman, P, M Grubbs, and K Johnston (2020). From Science to Adaptation: A Case Study in Nature-Based Adaptation to Improve Coastal Resiliency in Santa Monica Bay. Shore and Beach, Vol. 88 (3), pp. 39-52. DOI: 10.34237/1008834</p>
-<p>Harvey, M, SN Giddings, ED Stein, J Crooks, C Whitcraft, T Gallien, L Tiefenthaler, H Meltzer, G Pawlak, K Thorne, K Johnston, R Ambrose, S Schroeter, HM Page, and H Elwany (2020). Effects of Elevated Sea Levels and Waves on Southern California Estuaries during the 2015–2016 El Niño. Estuaries and Coasts, Vol 43, pp. 256–271. DOI: 10.1007/s12237-019-00676-1</p>
-<p>Johnston, K, C. Enyart, K Alvarez, and H Weyland (2020). Santa Monica Beach Restoration Pilot Project Year 4 Annual Report. Report prepared by The Bay Foundation for the City of Santa Monica, California Coastal Commission, US Environmental Protection Agency, and California Department of Parks and Recreation. 100 pp.</p>
-<p>Ryan, TP, DS Cooper, S Vigallon, C Dellith, KK Johnston, and L Nguyen (2019). Return of Beach Nesting Snowy Plovers to Los Angeles County Following a 68-Year Absence. Western Birds 50: 16-25 DOI: 10.21199/WB50.1.2</p>
-<p>Johnston, KK, M Grubbs, C Enyart, R Dagit, and D Cooper (2019). Malibu Lagoon Restoration and Enhancement Project Final Comprehensive Monitoring Report (Year 6). Report Prepared by The Bay Foundation for the State of California, Department of Parks and Recreation. 261 pp.</p>
-<p>Johnston, K, M Grubbs, and R Abbott (2018). Santa Monica Beach Restoration Pilot Project Year 2 Annual Report. Report prepared by The Bay Foundation for the City of Santa Monica, California Coastal Commission, Metabolic Studio, US Environmental Protection Agency, and California Department of Parks and Recreation. 67 pp.</p>
-<p>Abramson, M, K Johnston, M Grubbs, R Abbott, R Dagit, and D Cooper (2018). Malibu Lagoon Restoration and Enhancement Project Comprehensive Monitoring Report (Year 5). Report Prepared for the State of California, Department of Parks and Recreation. 170 pp.</p>
-<p>Abbott, R, M, Grubbs, and K Johnston (2018). Los Angeles International Airport Coastal Dunes Improvement Project Ecological Monitoring Report. Report Prepared for Los Angeles World Airports, City of LA and CA Coastal Commission. 60 pp.</p>
-<p>Johnston, K, M Grubbs, and R Abbott (2017). Santa Monica Beach Restoration Pilot Project Year 1 Annual Report. Report prepared by The Bay Foundation for the City of Santa Monica, California Coastal Commission, Metabolic Studio, US Environmental Protection Agency, and California Department of Parks and Recreation. 68 pp.</p>
-<p>Abramson, M, K Johnston, R Abbott, M Grubbs, R Dagit, and D Cooper (2017). Malibu Lagoon Restoration and Enhancement Project Comprehensive Monitoring Report (Year 4). Report Prepared for the State of California, Department of Parks and Recreation. 175 pp.</p>
-<p>Barton, ML, ID Medel, KK Johnston, and CR Whitcraft (2016). Seed Collection and Germination Strategies for Common Wetland and Coastal Sage Scrub Species in Southern California. Bulletin of the Southern California Academy of Sciences, Vol 115(1).</p>
-<p>Grubbs, M, K Johnston, G Wang, and T Ford (2016). Climate Change Vulnerability Assessment of the Santa Monica Bay National Estuary Program’s Bay Restoration Plan. Final Report prepared by the Santa Monica Bay National Estuary Program for the United States Environmental Protection Agency. 30 September 2016. 184 pp.</p>
-<p>Abramson, M, K Johnston, R Abbott, M Grubbs, R Dagit, and D Cooper (2016). Malibu Lagoon Restoration and Enhancement Project Comprehensive Monitoring Report (Year 3). Report Prepared for the State of California, Department of Parks and Recreation. 148 pp.</p>
-<p>Johnston, KK, J Dorsey, and J Saez (2015). Fecal Indicator Bacteria (FIB) Stratification and Loading in a Tidally Muted Urban Salt Marsh. Environmental Monitoring and Assessment: DOI: 10.1007/s10661-015-4314-z</p>
-<p>Ambrose, RF, JH Dorsey, KK Johnston, and ED Stein (2015). State of the Bay Report. “Habitat Conditions: Coastal Wetlands.” Urban Coast 5(1): 59-68.</p>
-<p>Foreman, K, D Hubbard, KK Johnston, and K Martin (2015). State of the Bay Report. “Habitat Conditions: Sandy Shores.” Urban Coast 5(1): 69-84.</p>
-<p>Johnston, KK, ID Medel, S Anderson, E Stein, C Whitcraft, and J Crooks (2015). California Estuarine Wetland Monitoring Manual (Level 3). Prepared by The Bay Foundation for the United States Environmental Protection Agency. 297 pages.</p>
-<p>Johnston, KK, ID Medel, S Anderson, R Abbott, and E Stein (2015). Regional Monitoring Report for Southern California Coastal Wetlands: Application of the USEPA Three-Tiered Monitoring Strategy. Prepared by The Bay Foundation for the United States Environmental Protection Agency. 100 pages.</p>
-<p>Johnston, KK, ID Medel, and C Solek (2015). Condition Assessment of the Wetland Habitats in the Ballona Wetlands Ecological Reserve, Los Angeles, CA. Technical Memorandum prepared for the California State Coastal Conservancy and the California Department of Fish and Wildlife, 11 pp.</p>
-<p>Abramson, M, K Johnston, I Medel, R Dagit, D Cooper, and R Abbott (2015). Malibu Lagoon Restoration and Enhancement Project Comprehensive Monitoring Report (Year 2). Report Prepared for the State of California, Department of Parks and Recreation. 135 pp.</p>
-<p>Johnston, KK, I Medel, A McCarthy, and T Harris (2014). Salt Pan Assessment to Inform Restoration Target Acreages at the Ballona Wetlands Ecological Reserve. Technical Memorandum prepared for the California State Coastal Conservancy and the California Department of Fish and Wildlife, 16 pp.</p>
-<p>Johnston, KK (2014). Socio-Economic Analyses of Coastal Ecosystem Resilience: Symposium Proceedings Document. Hosted by the Santa Monica Bay Restoration Commission and the Center for Urban Resilience, March 2014; 23 pp.</p>
-<p>Medel, ID, K Johnston, and A McCarthy (2014). Ballona Wetlands Ecological Reserve Vegetation Alliance and Habitat Crosswalk. Technical Memorandum prepared for the California State Coastal Conservancy and the California Department of Fish and Wildlife, 22 pp.</p>
-<p>McLaughlin, K, M Sutula, L Busse, S Anderson, J Crooks, R Dagit, D Gibson, K Johnston, and L Stratton (2013). A Regional Survey of Extent and Magnitude of Eutrophication in Southern California Estuaries. Estuaries and Coasts: DOI: 10.1007/s12237-013-9670-8</p>
-<p>Abramson, MA, R Dagit, DS Cooper, J King, KK Johnston, I Medel, and C Piechowski (2013). Malibu Lagoon Restoration and Enhancement Project Comprehensive Monitoring Report. Report prepared for the State of California Department of Parks and Recreation.</p>
-<p>Johnston, KK (2013). Climate Change in Urban Estuaries: Symposium Proceedings Document. Hosted by the Santa Monica Bay Restoration Commission and the Center for Urban Resilience, March 2013; 25 pp.</p>
-<p>McLaughlin, K, M Sutula, L Busse, S Anderson, J Crooks, R Dagit, D Gibson, K Johnston, N Nezlin, and L Stratton. 2012. Southern California Bight 2008 Regional Monitoring Program: VIII. Estuarine Eutrophication. Southern California Coastal Water Research Project. Costa Mesa, CA</p>
-<p>Johnston, KK (2012). Wetland Health and Assessment: An Information Inundation at the Ballona Wetlands Ecological Reserve. Urban Coast (3)1: 61-70.</p>
-<p>Johnston, KK, E Del Giudice-Tuttle, ID Medel, C Piechowski, D Cooper, J Dorsey, and S Anderson (2012). The Ballona Wetlands Ecological Reserve Baseline Assessment Program: 2010-2011 Report. Santa Monica Bay Restoration Commission. Report Prepared for the California State Coastal Conservancy, Los Angeles, California. 215 pp.</p>
-<p>Johnston, KK, E Del Giudice-Tuttle, ID Medel, J Dorsey, D Cooper, and SP Bergquist (2011). The Ballona Wetlands Ecological Reserve Baseline Assessment Program: 2009-2010. Report prepared for the California State Coastal Conservancy and California Department of Fish and Game. 446 pp.</p>
-<p>Del Giudice-Tuttle, E, KK Johnston, and ID Medel (2011). Evaluating Distribution and Prevalence of Non-native Vegetation in a Southern California Wetland and its Application to Inform Habitat Restoration and Non-native Vegetation Control. Proceedings of the California Invasive Plant Council Symposium (15): 35-38.</p>
-<p>Johnston, KK (2008). Habitat Associations and Growth Patterns in Butterflyfish of Orpheus Island, Australia. Submitted Master of Applied Science Thesis to James Cook University, Townsville, Australia, 77 pp.</p>
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#data-wrangling">Data Wrangling</a></li>
+<li><a href="#data-visualization">Data Visualization</a></li>
+<li><a href="#citations">Citations</a></li>
+</ul>
+</nav>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+hide
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>knitr</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/knitr/man/opts_chunk.html'>opts_chunk</a></span><span class='op'>$</span><span class='fu'>set</span><span class='op'>(</span>echo <span class='op'>=</span> <span class='cn'>TRUE</span>, message <span class='op'>=</span> <span class='cn'>FALSE</span>, warning <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='co'># Attach packages</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://here.r-lib.org/'>here</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readxl.tidyverse.org'>readxl</a></span><span class='op'>)</span> <span class='co'># to read in excel files</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://lubridate.tidyverse.org'>lubridate</a></span><span class='op'>)</span> <span class='co'># to update dates</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://wilkelab.org/cowplot/'>cowplot</a></span><span class='op'>)</span> <span class='co'># to merge the graphs</span>
+</code></pre>
+</div>
+</details>
+</div>
+<h2 id="introduction">Introduction</h2>
+<p>The Sierra Lakes Inventory Project (SLIP) was a research endeavor that ran from 1995-2002 and has supported research and management of Sierra Nevada aquatic ecosystems and their terrestrial interfaces. They described the physical characteristics of and surveyed aquatic communities for &gt; 8,000 lentic water bodies in the southern Sierra Nevada, including lakes, ponds, marshes, and meadows (Knapp et al. 2020). The objective of this report was to create a final visualization (two-part graph) of the frog count data for the mountain yellow-legged frog (<em>Rana muscosa</em>).</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+hide
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Read in the data</span>
+<span class='va'>amphibians</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readxl.tidyverse.org/reference/read_excel.html'>read_excel</a></span><span class='op'>(</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"data"</span>, <span class='st'>"sierra_amphibians.xlsx"</span><span class='op'>)</span><span class='op'>)</span> 
+</code></pre>
+</div>
+</details>
+</div>
+<h2 id="data-wrangling">Data Wrangling</h2>
+<p>Filter the data to be only the mountain yellow-legged frog (<em>Rana muscosa</em>, code RAMU) and keeping only the life stages of adult, subadult, and tadpole. Mutate the columns to add a new one with “year” using the <code>lubridate</code> package.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+hide
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Subset the data</span>
+
+<span class='va'>amph_sub</span> <span class='op'>&lt;-</span> <span class='va'>amphibians</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>amphibian_species</span> <span class='op'>==</span> <span class='st'>"RAMU"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='co'># choose only Rana muscosa</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>amphibian_life_stage</span> <span class='op'>!=</span> <span class='st'>"EggMass"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='co'># drop the Eggmass category</span>
+
+  <span class='co'># updates the date column to be Date format and adds a year column </span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>date <span class='op'>=</span> <span class='fu'><a href='https://lubridate.tidyverse.org/reference/ymd.html'>ymd</a></span><span class='op'>(</span><span class='va'>survey_date</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>year <span class='op'>=</span> <span class='fu'><a href='https://lubridate.tidyverse.org/reference/year.html'>year</a></span><span class='op'>(</span><span class='va'>survey_date</span><span class='op'>)</span><span class='op'>)</span> 
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+hide
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Summarize the counts by year</span>
+
+<span class='va'>amph_summary</span> <span class='op'>&lt;-</span> <span class='va'>amph_sub</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>amphibian_life_stage</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>total <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>amphibian_number</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<p>A second set of data wrangling to count only the adult and subadult mountain yellow-legged frogs and to rename the lake column in the dataframe.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+hide
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Subset the data</span>
+
+<span class='va'>amph_adult_sub</span> <span class='op'>&lt;-</span> <span class='va'>amph_sub</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>amphibian_life_stage</span> <span class='op'>!=</span> <span class='st'>"Tadpole"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='co'># delete Tadpoles</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>lake <span class='op'>=</span> <span class='st'>"Lake"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='co'># add a new column "Lake"</span>
+  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/unite.html'>unite</a></span><span class='op'>(</span><span class='st'>"lake_id_new"</span>, <span class='va'>lake</span>, <span class='va'>lake_id</span>, sep <span class='op'>=</span> <span class='st'>" "</span>, remove <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='co'># use unite to merge the columns and create a new one to sort by</span>
+
+<span class='co'># Summarize the counts by lake id </span>
+<span class='va'>amph_adult_summary</span> <span class='op'>&lt;-</span> <span class='va'>amph_adult_sub</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>lake_id_new</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>total <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>amphibian_number</span><span class='op'>)</span><span class='op'>)</span> 
+</code></pre>
+</div>
+</details>
+</div>
+<h2 id="data-visualization">Data Visualization</h2>
+<p>Create (A) a graph of total mountain yellow-legged frog (<em>Rana muscosa</em>) count each year across all water bodies, by life stage excluding the ‘EggMass’ level, and (B) a column graph containing total counts (over all years of the study) of combined adult and subadult endangered mountain yellow-legged frogs observed in the five lakes with the greatest total observed counts.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+hide
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Creates a new ggplot figure visualizing amph_summary</span>
+
+<span class='va'>ramu_count</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>amph_summary</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>year</span>, y <span class='op'>=</span> <span class='va'>total</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>amphibian_life_stage</span><span class='op'>)</span>, 
+           color <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span> <span class='op'>+</span>
+
+  <span class='co'># changes fill colors to be more aesthetic</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_continuous</a></span><span class='op'>(</span>n.breaks <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span> <span class='op'>+</span> <span class='co'># to clean up the x-axis year numbering</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_fill_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"blue"</span>, <span class='st'>"light blue"</span>, <span class='st'>"yellow"</span><span class='op'>)</span>, 
+                    name <span class='op'>=</span> <span class='st'>"Life Stage"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org/reference/label_number.html'>comma</a></span>, n.breaks <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span> <span class='op'>+</span>
+
+  <span class='co'># updates the axis labels</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Year"</span>, y <span class='op'>=</span> <span class='st'>"Total Number of Frogs"</span><span class='op'>)</span> <span class='op'>+</span>
+
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_classic</a></span><span class='op'>(</span><span class='op'>)</span> <span class='co'># clean theme</span>
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+hide
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Create a second visualization bar graph with totals by lake</span>
+
+<span class='va'>ramu_adult</span> <span class='op'>&lt;-</span> <span class='va'>amph_adult_summary</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  
+  <span class='co'># to reorder and cut the top 5 lakes from the dataframe</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>lake_id_new <span class='op'>=</span> <span class='fu'><a href='https://forcats.tidyverse.org/reference/fct_reorder.html'>fct_reorder</a></span><span class='op'>(</span><span class='va'>lake_id_new</span>, <span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>total</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_max</a></span><span class='op'>(</span>order_by <span class='op'>=</span> <span class='va'>total</span>, n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  
+<span class='co'># Create the new ggplot using the adult frog data</span>
+ <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>lake_id_new</span>, 
+                         y <span class='op'>=</span> <span class='va'>total</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"blue"</span>, 
+           color <span class='op'>=</span> <span class='st'>"black"</span>,
+           width <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_classic</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> 
+<span class='co'>#  coord_flip() +</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Lake ID"</span>, y <span class='op'>=</span> <span class='st'>"Total Number of Frogs"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org/reference/label_number.html'>comma</a></span>, n.breaks <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span> 
+
+
+<span class='co'># Use the cowplot package to merge the plots into one figure</span>
+<span class='fu'><a href='https://wilkelab.org/cowplot/reference/plot_grid.html'>plot_grid</a></span><span class='op'>(</span><span class='va'>ramu_count</span>, <span class='va'>ramu_adult</span>, 
+          labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span><span class='op'>)</span>, 
+          label_size <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
+<img src="amphibians_files/figure-html5/unnamed-chunk-6-1.png" alt="**Figure 1.** Sierra Lakes mountain yellow-legged frog (*Rana muscosa*) counts: (A) by year and life stage across all waterbodies, and (B) combined adult and subadult counts for the top five waterbodies (Data: Knapp et al. 2020)." width="864" />
+<p class="caption">
+Figure 1: <strong>Figure 1.</strong> Sierra Lakes mountain yellow-legged frog (<em>Rana muscosa</em>) counts: (A) by year and life stage across all waterbodies, and (B) combined adult and subadult counts for the top five waterbodies (Data: Knapp et al. 2020).
+</p>
+</div>
+</div>
+<h2 id="citations">Citations</h2>
+<p>Knapp, R.A., C. Pavelka, E.E. Hegeman, and T.C. Smith. 2020. The Sierra Lakes Inventory Project: Non-Native fish and community composition of lakes and ponds in the Sierra Nevada, California ver 2. Environmental Data Initiative. <a href="https://doi.org/10.6073/pasta/d835832d7fd00d9e4466e44eea87fab3" class="uri">https://doi.org/10.6073/pasta/d835832d7fd00d9e4466e44eea87fab3</a></p>
+<p>R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
+<p>Wickham, H. et al., (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686, <a href="https://doi.org/10.21105/joss.01686" class="uri">https://doi.org/10.21105/joss.01686</a></p>
+<p>Wickham, H. and J. Bryan (2019). readxl: Read Excel Files. R package version 1.3.1. <a href="https://CRAN.R-project.org/package=readxl" class="uri">https://CRAN.R-project.org/package=readxl</a></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

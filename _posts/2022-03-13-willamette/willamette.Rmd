@@ -1,0 +1,239 @@
+---
+title: "Willamette Falls Fish Passage Time Series"
+description: |
+  This report performs time series analyses on the Willamette Falls fish passage adult salmonid fish data.
+author:
+  - name: Karina Johnston
+    url: {}
+date: 2022-03-13
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: yes
+    code_folding: hide
+---
+
+
+## Overview
+
+```{r setup, include = TRUE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+
+# Attach packages
+library(tidyverse)
+library(here)
+library(lubridate)
+
+# Time series packages
+library(tsibble) # df that has special characteristics for time series
+library(feasts) # specifically for time series data analyses
+library(slider)
+
+library(patchwork)
+
+```
+
+Columbia River DART provides an interactive data resource designed for research and management purposes relating to the Columbia Basin salmon populations and river environment. Currently, daily data plus historic information dating back to 1878 are accessible online. Columbia River DART focuses on the Columbia Basin dams and fish passage. 
+
+This report focuses on the Willamette Falls fish passage adult fish data. The historic Willamette Falls Locks are located on the west bank of the Willamette River in West Linn, Oregon. They were built in the early 1870s to move river traffic around the 40-foot horseshoe-shaped basalt ridge between Oregon City and West Linn (USACE 2022). Fish counting through the Willamette Falls fishway occurs at the main viewing window. Video cameras and time lapsed video recorders are used to record fish passage 24 hrs/day, 365 days/year.
+
+This report includes time series data analyses for three adult fish species, including coho, jack coho, and steelhead salmon. Then a finalized seasonplot for each species was created, and a finalized figure of annual total counts for fish passage for each of the three species. 
+
+Data Citation: Columbia River DART Adult Passage Inventory Willamette Falls - All Species. Accessed 27 February 2022. Columbia River DART (Data Access in Real Time) www.cbr.washington.edu/dart.
+
+<p>&nbsp;</p>
+
+
+### Salmonid Time Series
+
+In this report section, a finalized static time series graph of adult fish passage counts for coho, jack coho, and steelhead salmon was created (Figure 3), using the `facet_wrap()` function. Note that the y-axis for each species is the same in each facet of the graph for ease in comparison. Notable observations of the graphs include the appearance of seasonality in the time series data for each species, but with consistently higher counts of adult fish for the steelhead trout species as compared to the coho and jack coho salmon. However, the coho salmon experienced the highest 'spikes' or high counts of adult fish over a short time period in the latter years (2009-2010), with counts of over 1,000 individual fish. The coho data also appear to experience the highest variability across the years.
+
+
+```{r}
+# Read in the data
+fish <- read_csv(here("data", "willamette_fish_passage.csv")) %>% 
+  janitor::clean_names()
+
+# Change the NAs to be zeros
+fish[is.na(fish)] <- 0
+
+```
+
+
+```{r}
+# Subset the fish data for only the three species of interest, change date format
+
+fish_sub <- fish %>% 
+  select(project, date, steelhead, coho, jack_coho) %>% 
+  mutate(date = mdy(date))
+
+fish_pivot <- fish_sub %>% 
+  pivot_longer(cols = 3:5, names_to = "species", values_to = "count")
+
+```
+
+
+```{r, fig.cap= "**Figure 3.** Time series graph of counts of three adult fish species in the Columbia River passing a fish ladder in Willamette Falls (Data: Columbia River DART, accessed 2022-02-27)."}
+
+
+ggplot(data = fish_pivot, aes(x = date, y = count)) +
+  geom_line(color = "darkblue") +
+  facet_wrap(~species, nrow = 3, ncol = 1, labeller = "label_both") +
+  scale_y_continuous(n.breaks = 6) +
+  theme_classic() +
+  labs(x = "Year", y = "Count of Adult Fish")
+
+```
+
+
+### Seasonplots
+
+In this report section, a finalized seasonplot was created for each salmonid species in its own panel (i.e., coho, jack coho, and steelhead) using the `patchwork` package (Figure 4). Each year is represented by a color line with the months on the x-axis. The adult coho and jack coho salmon have consistent high peaks in counts in the month of September each year, while the steelhead trout show a gradual increase in adult counts between February through June, with peaks each year usually occurring in May or June. The max monthly peak count for the jack coho in September is much lower (an order of magnitude) than the coho September counts. The monthly subseries plots show similar patterns (Figure 5).
+
+
+```{r}
+# convert dataframe to a tsibble using the `as_tsibble()` function
+
+fish_ts <- fish_sub %>% 
+  as_tsibble(key = NULL, index = date)
+
+# summarize each of the fish counts by month
+
+steelhead_month <- fish_ts %>% 
+  index_by(yr_mo = ~yearmonth(.)) %>% 
+  summarize(monthly_count = mean(steelhead, na.rm = TRUE))
+
+coho_month <- fish_ts %>% 
+  index_by(yr_mo = ~yearmonth(.)) %>% 
+  summarize(monthly_count = mean(coho, na.rm = TRUE))
+
+jack_coho_month <- fish_ts %>% 
+  index_by(yr_mo = ~yearmonth(.)) %>% 
+  summarize(monthly_count = mean(jack_coho, na.rm = TRUE))
+
+```
+
+
+```{r, include=FALSE}
+
+# these exploratory visualization plots will not be included in the final display
+
+ggplot(data = steelhead_month, aes(x = yr_mo, y = monthly_count)) +
+  geom_line()
+
+steelhead_month %>% 
+  ggplot(aes(x = year(yr_mo), y = monthly_count)) +
+  geom_line() +
+  facet_wrap(~month(yr_mo, label = TRUE)) 
+
+```
+
+
+```{r, fig.height = 5.5, fig.width = 8, fig.cap = "**Figure 4.** Seasonplot of monthly adult salmonid fish passage data for three species in Willamette Falls (Data: Columbia River DART, accessed 2022-02-27). Note the variable y-axis for the adult jack coho salmon."}
+
+# use feasts:gg_season() to make seasonplots for each species
+
+steelhead_season <- steelhead_month %>% 
+  gg_season(y = monthly_count, size = 0.7) +
+  labs(x = "Month", y = "Adult Fish Count", title = "Adult Steelhead Counts") +
+  theme_classic() +
+  scale_y_continuous(limits = c(0, 500)) +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust=0.5)) 
+
+coho_season <- coho_month %>% 
+  gg_season(y = monthly_count, size = 0.7) +
+  labs(x = "Month", y = "Adult Fish Count", title = "Adult Coho Counts") +
+  theme_classic() +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust=0.5))
+
+jack_coho_season <- jack_coho_month %>% 
+  gg_season(y = monthly_count, size = 0.7) +
+  labs(x = "Month", y = "Adult Fish Count", title = "Adult Jack Coho Counts") +
+  theme_classic() +
+  scale_y_continuous(n.breaks = 7) +
+  theme(plot.title = element_text(hjust=0.5)) 
+
+coho_season / jack_coho_season / steelhead_season
+
+```
+
+
+```{r, fig.height = 6, fig.width = 8, fig.cap = "**Figure 5.** Monthly subseries plots of adult salmonid fish passage data for three species in Willamette Falls (Data: Columbia River DART, accessed 2022-02-27). Note the variable y-axis for the adult jack coho salmon."}
+
+subplot_coho <- coho_month %>% 
+  gg_subseries(monthly_count) +
+  labs(x = "Year", y = "Fish Count", title = "Adult Coho Counts") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 90))
+
+subplot_jack <- jack_coho_month %>% 
+  gg_subseries(monthly_count) +
+  labs(x = "Year", y = "Fish Count", title = "Adult Jack Coho Counts") +
+  theme_classic() +
+  scale_y_continuous(n.breaks = 7) +
+  theme(plot.title = element_text(hjust=0.5),
+        axis.text.x = element_text(angle = 90))
+
+subplot_steelhead <- steelhead_month %>% 
+  gg_subseries(monthly_count) +
+  labs(x = "Year", y = "Fish Count", title = "Adult Steelhead Counts") +
+  theme_classic() +
+  scale_y_continuous(limits = c(0, 500)) +
+  theme(plot.title = element_text(hjust=0.5),
+        axis.text.x = element_text(angle = 90))
+
+subplot_coho / subplot_jack / subplot_steelhead
+
+```
+
+
+### Annual Counts by Species
+
+In this report section, a finalized figure of annual totals for fish passage for each of the three species of assessment was created (e.g., coho, jack coho, and steelhead) (Figure 6). The total count for all species varied by year, with steelhead showing a slight decline annually since 2002 until an increase in 2010. The annual totals of coho salmon remained fairly low until 2009-2010, when the annual totals increased substantially. Jack coho salmon had the lowest annual counts each year, evaluated comparatively to the other two species. Steelhead consistently had the highest annual total count each year, compared to the other two species, with the exception of 2009, when coho had the highest count. 
+
+
+```{r, fig.cap = "**Figure 6.** Annual fish counts for three species of salmonid in Willamette Falls (Data: Columbia River DART, accessed 2022-02-27)."}
+
+# create a new dataframe, group by year and sum the counts, pivot longer to make the dataframe tidy
+
+fish_totals <- fish_sub %>% 
+  mutate(year = year(date)) %>% 
+  group_by(year) %>% 
+  summarize(steelhead_sum = sum(steelhead),
+            coho_sum = sum(coho),
+            jack_sum = sum(jack_coho)) %>% 
+  pivot_longer(cols = 2:4,
+               names_to = "species", values_to = "counts")
+
+# plot the annual totals
+ggplot(data = fish_totals, aes(x = year, y = counts)) +
+  geom_col(aes(fill = species), color = "black") +
+  scale_fill_manual(values = c("darkblue", "cornflowerblue", "cyan1"),
+                      breaks = c("coho_sum", "jack_sum", "steelhead_sum"),
+                      labels = c("Coho", "Jack Coho", "Steelhead")) +
+  theme_classic() +
+  scale_x_continuous(breaks = 2001:2010) +
+  scale_y_continuous(n.breaks = 11) +
+  labs(x = "Year", y = "Annual Fish Count",
+       title = "Annual Salmonid Fish Count by Species") +
+  theme(plot.title = element_text(hjust=0.5))
+
+```
+
+
+### Citations
+
+Columbia River DART Adult Passage Inventory Willamette Falls - All Species. Accessed 27 February 2022. Columbia River DART (Data Access in Real Time) www.cbr.washington.edu/dart.
+
+R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
+
+Wickham, H. et al., (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686, https://doi.org/10.21105/joss.01686
+
+Oregon Department of Fish and Wildlife, Willamette Falls photograph. Accessed 27 February 2022. https://myodfw.com/willamette-falls-fish-counts
+
+US Army Corps of Engineers, Willamette Falls map. Accessed 27 February 2022. https://www.nwp.usace.army.mil/willamette/locks/
+
+

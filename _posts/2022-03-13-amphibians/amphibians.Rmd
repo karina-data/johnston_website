@@ -1,0 +1,151 @@
+---
+title: "Sierra Amphibians Visualization"
+description: |
+  This report creates a final visualization (two-part graph) of frog count data for the mountain yellow-legged frog using Sierra Lakes Inventory Project data.
+author:
+  - name: Karina Johnston
+    url: {}
+date: 2022-03-13
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: yes
+    code_folding: hide
+---
+
+
+```{r setup, include = TRUE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+
+# Attach packages
+library(here)
+library(tidyverse)
+library(readxl) # to read in excel files
+library(lubridate) # to update dates
+library(cowplot) # to merge the graphs
+
+```
+
+## Introduction
+
+The Sierra Lakes Inventory Project (SLIP) was a research endeavor that ran from 1995-2002 and has supported research and management of Sierra Nevada aquatic ecosystems and their terrestrial interfaces. They described the physical characteristics of and surveyed aquatic communities for > 8,000 lentic water bodies in the southern Sierra Nevada, including lakes, ponds, marshes, and meadows (Knapp et al. 2020). The objective of this report was to create a final visualization (two-part graph) of the frog count data for the mountain yellow-legged frog (*Rana muscosa*). 
+
+
+```{r}
+# Read in the data
+amphibians <- read_excel(here("data", "sierra_amphibians.xlsx")) 
+
+```
+
+
+## Data Wrangling
+
+Filter the data to be only the mountain yellow-legged frog (*Rana muscosa*, code RAMU) and keeping only the life stages of adult, subadult, and tadpole. Mutate the columns to add a new one with "year" using the `lubridate` package. 
+
+```{r}
+# Subset the data
+
+amph_sub <- amphibians %>% 
+  filter(amphibian_species == "RAMU") %>% # choose only Rana muscosa
+  filter(amphibian_life_stage != "EggMass") %>% # drop the Eggmass category
+
+  # updates the date column to be Date format and adds a year column 
+  mutate(date = ymd(survey_date)) %>% 
+  mutate(year = year(survey_date)) 
+
+```
+
+
+```{r}
+# Summarize the counts by year
+
+amph_summary <- amph_sub %>% 
+  group_by(year, amphibian_life_stage) %>% 
+  summarize(total = sum(amphibian_number))
+
+```
+
+A second set of data wrangling to count only the adult and subadult mountain yellow-legged frogs and to rename the lake column in the dataframe.
+
+```{r}
+# Subset the data
+
+amph_adult_sub <- amph_sub %>% 
+  filter(amphibian_life_stage != "Tadpole") %>% # delete Tadpoles
+  mutate(lake = "Lake") %>% # add a new column "Lake"
+  unite("lake_id_new", lake, lake_id, sep = " ", remove = FALSE)
+# use unite to merge the columns and create a new one to sort by
+
+# Summarize the counts by lake id 
+amph_adult_summary <- amph_adult_sub %>% 
+  group_by(lake_id_new) %>% 
+  summarize(total = sum(amphibian_number)) 
+
+```
+
+
+## Data Visualization
+
+Create (A) a graph of total mountain yellow-legged frog (*Rana muscosa*) count each year across all water bodies, by life stage excluding the ‘EggMass’ level, and (B) a column graph containing total counts (over all years of the study) of combined adult and subadult endangered mountain yellow-legged frogs observed in the five lakes with the greatest total observed counts.
+
+```{r}
+# Creates a new ggplot figure visualizing amph_summary
+
+ramu_count <- ggplot(data = amph_summary, aes(x = year, y = total)) +
+  geom_col(aes(fill = amphibian_life_stage), 
+           color = "black") +
+
+  # changes fill colors to be more aesthetic
+  scale_x_continuous(n.breaks = 5) + # to clean up the x-axis year numbering
+  scale_fill_manual(values = c("blue", "light blue", "yellow"), 
+                    name = "Life Stage") +
+  scale_y_continuous(labels = scales::comma, n.breaks = 8) +
+
+  # updates the axis labels
+  labs(x = "Year", y = "Total Number of Frogs") +
+
+  theme_classic() # clean theme
+
+```
+
+
+```{r, fig.width = 9, fig.height = 4, fig.cap = "**Figure 1.** Sierra Lakes mountain yellow-legged frog (*Rana muscosa*) counts: (A) by year and life stage across all waterbodies, and (B) combined adult and subadult counts for the top five waterbodies (Data: Knapp et al. 2020)."}
+
+# Create a second visualization bar graph with totals by lake
+
+ramu_adult <- amph_adult_summary %>% 
+  
+  # to reorder and cut the top 5 lakes from the dataframe
+  mutate(lake_id_new = fct_reorder(lake_id_new, desc(total))) %>% 
+  slice_max(order_by = total, n = 5) %>% 
+  
+# Create the new ggplot using the adult frog data
+ ggplot(aes(x = lake_id_new, 
+                         y = total)) + 
+  geom_col(fill = "blue", 
+           color = "black",
+           width = 0.5) + 
+  theme_classic() + 
+#  coord_flip() +
+  labs(x = "Lake ID", y = "Total Number of Frogs") +
+  scale_y_continuous(labels = scales::comma, n.breaks = 10) 
+
+
+# Use the cowplot package to merge the plots into one figure
+plot_grid(ramu_count, ramu_adult, 
+          labels = c("A", "B"), 
+          label_size = 12)
+
+```
+
+
+## Citations
+
+Knapp, R.A., C. Pavelka, E.E. Hegeman, and T.C. Smith. 2020. The Sierra Lakes Inventory Project: Non-Native fish and community composition of lakes and ponds in the Sierra Nevada, California ver 2. Environmental Data Initiative. https://doi.org/10.6073/pasta/d835832d7fd00d9e4466e44eea87fab3
+
+R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL   https://www.R-project.org/.
+
+Wickham, H. et al., (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686, https://doi.org/10.21105/joss.01686
+
+Wickham, H. and J. Bryan (2019). readxl: Read Excel Files. R package version 1.3.1. https://CRAN.R-project.org/package=readxl
+
