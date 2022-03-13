@@ -3,9 +3,6 @@ title: "Karina Johnston"
 description: |
   Karina's Website
 output_dir: "docs"
-collections:
-  posts:
-    share: [twitter, linkedin]
 navbar:
   right:
     - text: "Home"
