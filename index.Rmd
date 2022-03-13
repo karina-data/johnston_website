@@ -8,7 +8,6 @@ links:
     url: "mailto:karinajohnston@ucsb.edu"
   - label: GitHub
     url: "https://github.com/karina-data"
-
 output:
   postcards::jolla
 site: distill::distill_website

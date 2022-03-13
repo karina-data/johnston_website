@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 ```
 
-<a href = “K.Johnston_CV_Jan2022.pdf” target = “_blank” > Click here for a full CV (pdf)</a>
+<a href=“cv.pdf” target = “_blank”>Click here for a full CV (pdf)</a>
 
 
 ## Interests and Experience
