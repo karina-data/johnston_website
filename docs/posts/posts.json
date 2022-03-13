@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "path": "posts/2022-03-12-welcome/",
+    "title": "Welcome",
+    "description": "This is a brief introduction post.",
+    "author": [
+      {
+        "name": "Karina Johnston",
+        "url": {}
+      }
+    ],
+    "date": "2022-02-10",
+    "categories": [],
+    "contents": "\r\nWelcome to my website! Thank you for visiting. Within this website, you will find some summary professional information about me, as well as a copy of my CV, and portfolio examples of my work in the field of ecology, marine science, coastal resilience, and burgeoning data science. While this site is focused on the presentation of data science and coding materials, there are also several examples of restoration ecology and implementation of restoration projects, including wetlands, beaches, and dunes.\r\nPlease don’t hesitate to reach out to me for more information. Enjoy!\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2022-03-13T00:17:25-08:00",
+    "input_file": {}
+  }
+]
