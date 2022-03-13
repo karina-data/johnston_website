@@ -1,6 +1,4 @@
 ---
-title: "Blog"
+title: "Portfolio"
 listing: posts
-output: html_document
 ---
-

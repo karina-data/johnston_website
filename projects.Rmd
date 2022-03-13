@@ -1,0 +1,17 @@
+---
+title: "Example Projects"
+description: |
+  This page highlights a few projects that Karina has directed and managed.
+author:
+  - name: Karina Johnston 
+    affiliation: The Bay Foundation
+    affiliation_url: https://santamonicabay.org
+output: distill::distill_article
+---
+
+Santa Monica Beach Restoration Pilot Project
+
+![](img/pathview_verbena.jpg)
+
+This photograph shows INSERT DESCRIPTION (credit: The Bay Foundation).
+

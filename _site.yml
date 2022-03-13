@@ -1,16 +1,25 @@
 name: "."
 title: "Karina Johnston"
 description: |
-  Website
+  Karina's Website
 output_dir: "docs"
+collections:
+  posts:
+    share: [twitter, linkedin]
 navbar:
   right:
     - text: "Home"
       href: index.html
     - text: "About"
       href: about.html
-    - text: "Blog"
-      href: blog.html
+    - text: "Portfolio"
+      menu:
+        - text: "Example Coding Reports"
+          href: blog.html
+        - text: "Data Visualizations"
+          href: data_viz.html
+        - text: "Restoration Projects"
+          href: projects.html
 
 output: distill::distill_article
 
