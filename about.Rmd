@@ -4,8 +4,7 @@ description: |
   Professional information about Karina
 ---
 
-
-<a href=“cv.pdf” target = “_blank”>Click here for a full CV (pdf)</a>
+[Click here for a full CV](https://drive.google.com/file/d/18opj1MLukF3P3iFg7coWei1JTSHl6itJ/view?usp=sharing)
 
 
 ## Interests and Experience
@@ -15,6 +14,9 @@ Karina Johnston has been a passionate scientific and community leader in the sou
 As CRI’s Director of Programs, she developed and oversees the internship and faculty fellowship programs, conducts research, and teaches in Environmental Science. Current research fields include coastal ecology, coastal resiliency, restoration ecology, and water quality. In 2021, Karina won the Part Time Faculty Distinguished Teaching Award from LMU for her teaching and research service.
 
 Karina is recently finished leading the multi-year public process to perform major revisions to regional strategic plans, including a revised Comprehensive Monitoring Program and Climate Action Plan for the region. Karina is also a Board Certified Environmental Scientist, with a Biology specialty and is a Certified Ecological Restoration Practitioner (Society for Ecological Restoration). In 2021, Karina began a PhD program at UCSB in Environmental Science and aims to conduct research relating to ecological and physical trajectories of beach restoration projects in southern California in partnership with her academic and community mentors.
+
+![](img/ballona_horiz.jpg)
+
 
 ## Publications and Peer Reviewed Technical Documents (selected)
 

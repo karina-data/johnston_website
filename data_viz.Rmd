@@ -5,7 +5,7 @@ description: |
 output: distill::distill_article
 ---
 
-This page includes data visualizations from a variety of analyses and data sources to showcase the variability of potential data visuals and a range of analyses. Note captions are below each figure.
+This page includes a variety of static data visualizations that Karina created from various analyses and data sources to showcase the variability of potential data visuals and a range of analyses. Note descriptive captions are below each figure.
 
 ![](img/mono_lake.png)
 
