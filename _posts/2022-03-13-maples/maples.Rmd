@@ -1,0 +1,188 @@
+---
+title: "Sugar Maples and Soil Acidification"
+description: |
+  This report explores the characteristics of sugar maple seedlings in a Calcium (Ca)- treated watershed at Hubbard Brook Experimental Forest as compared  to the characteristics of seedlings growing on reference sites.
+author:
+  - name: Karina Johnston
+    url: {}
+date: 2022-02-20
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: yes
+    code_folding: hide
+---
+
+
+```{r setup, include = TRUE, warning = FALSE, message = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+# Attach packages
+library(tidyverse)
+library(here)
+library(kableExtra)
+library(effsize)
+
+```
+
+
+```{r}
+# Read in the data
+maple_data <- read_csv(here("data", "maples.csv"))
+```
+
+### Introduction
+
+This report explores the characteristics of sugar maple seedlings in a Calcium (Ca)- treated watershed at Hubbard Brook Experimental Forest as compared  to the characteristics of seedlings growing on reference sites (Juice and Fahey 2019). The reference location has been impacted by acid rain, which leaches calcium, an important plant nutrient, while the other watershed has had calcium additions. 
+
+Preliminary summary statistics are calculated for both survey years (2003-2004) and subsequent analyses are conducted on the 2003 year only. The primary question analyzed is: "Is there a significant difference in stem dry masses for sugar maples, recorded in 2003, between the reference and calcium-treated watersheds?"
+
+### Summary Data Table - 2003-2004 
+
+Table 1 contains a summary of of stem mass (g) and stem length (mm) data for Hubbard Brooks LTER sugar maples in a calcium-treated watershed (W1) and a reference watershed (SD = 1 standard deviation) (Data: Juice and Fahey 2019).
+
+
+```{r}
+# this code chunk creates a new dataframe with summary statistics to output a final table
+
+maple_table <- maple_data %>% # create a new dataframe
+  group_by(watershed, year) %>% # group by variables
+
+  # output summary statistics into the dataframe table
+  summarize(mean_stem_mass = round(mean(stem_dry_mass, na.rm = TRUE), 3),
+            sd_stem_mass = round(sd(stem_dry_mass, na.rm = TRUE), 3),
+            mean_stem_length = round(mean(stem_length, na.rm = TRUE), 2),
+            sd_stem_length = round(sd(stem_length, na.rm = TRUE), 2),
+            sample_size = n()
+  )
+
+# these functions update the table to be cleaner, easier to read, and visually appealing / finalized
+kable(maple_table,
+      col.names = c("Watershed", # changes the column names
+                    "Year", 
+                    "Mean Stem Mass (g)",
+                    "SD Stem Mass (g)",
+                    "Mean Stem Length (mm)",
+                    "SD Stem Length (mm)",
+                    "Sample Size"),
+      align = "lcccccc", # changes the alignment of the columns
+    
+# adds a caption
+      caption = "Table 1. Summary of stem mass (g) and stem length (mm) data for Hubbard Brooks LTER sugar maples in a calcium-treated watershed (W1) and a reference watershed (SD = 1 standard deviation) (Data: Juice and Fahey 2019).") %>% 
+
+# better lines within the table
+kable_classic(full_width = FALSE)
+```
+
+
+### Data Analyses - 2003 Only
+
+Figure 1 visualizes both the raw data and summary statistics for sugar maple stem dry masses (g) compared between a reference (acid rain) watershed and a calcium-treated watershed (Data: Juice and Fahey 2019).
+
+```{r}
+# create a new subset dataframe using sugar maple data from only 2003
+
+maple_sub <- maple_data %>% 
+  filter(year == "2003")
+
+```
+
+<br>
+
+```{r, fig.cap = "**Figure 1.** Sugar maple stem dry masses (g) compared between a reference (acid rain) watershed and a calicium-treated watershed. The graph contains both raw data and summary boxplot statistics (Data: Juice and Fahey 2019).", fig.align = "center"}
+
+# create a final visualization comparing stem dry mass by watershed
+
+# to change label names and colors
+xlabs <- c("Reference", "Calcium Treated")
+boxcolor <- c("cyan4", "orange")
+
+
+# graph showing stem dry mass by watershed
+ggplot(data = maple_sub, aes(x = watershed, y = stem_dry_mass)) +
+  geom_boxplot(aes(fill = watershed)) +
+  geom_jitter(data = maple_sub, # to also visualize/include the raw data
+              aes(x = watershed, y = stem_dry_mass), 
+              color = "black", # points will be black
+              alpha = 0.5, # increase transparency
+              position = position_jitter(width = 0.15)) + # to narrow the width of the jitter
+  theme_classic(base_size = 12) +
+  labs(x = "Watershed", y = "Stem Dry Mass (g)") +
+
+  scale_x_discrete(labels = xlabs) + # make labels more readable than a code
+  scale_fill_manual(values = boxcolor) + # change the fill color
+  scale_y_continuous(breaks = waiver(), # increase the number of y-axis breaks
+                     n.breaks = 8) +
+  guides(fill = FALSE) # removes unnecessary legends
+
+```
+
+<br>
+
+#### Exploratory Visualizations
+
+This section creates several exploratory (unfinalized) visualizations to determine if a parametric statistical test is appropriate. 
+
+```{r}
+# exploratory visualizations
+
+# exploratory histogram
+ggplot(data = maple_sub, aes(x = stem_dry_mass)) +
+  geom_histogram(bins = 16, aes(fill = watershed), color = "black") +
+  facet_wrap(~ watershed) +
+  labs(x = "Stem Dry Mass (g)", y = "Count") +
+  theme_classic()
+
+# exploratory quantile-quantile plot 
+ggplot(data = maple_sub, aes(sample = stem_dry_mass)) +
+  geom_qq(aes(color = watershed)) +
+  facet_wrap(~ watershed) +
+  theme_classic()
+
+```
+
+The histogram of stem dry mass (g) shows that the data are relatively normally distributed, and the quantile-quantile plot shows a relatively linear comparison of the sample to theoretical distributions. Because the data appear normal, a Welch's t-test for comparison of two means is an appropriate statistical analysis. 
+
+```{r}
+# Conduct a t-test as the statistical analysis
+
+mass_reference <- maple_sub %>% # creates a new dataframe
+  filter(watershed == "Reference") %>% # to filter reference records
+  drop_na(stem_dry_mass) %>% # to drop the NAs
+  pull(stem_dry_mass) # to pull a vector of just mass (easier for t-test)
+
+mass_treated <- maple_sub %>% # creates a new dataframe 
+  filter(watershed == "W1") %>% # to filter treated records
+  drop_na(stem_dry_mass) %>% # to drop the NAs
+  pull(stem_dry_mass) # to pull a vector of just mass (easier for t-test)
+
+# run a t-test to determine significant difference
+mass_ttest <- t.test(mass_reference, mass_treated)
+# mass_ttest # output the t-test results
+
+# run the cohen d test (for effect size)
+mass_cohen_d <- cohen.d(mass_reference, mass_treated)
+# mass_cohen_d # output the cohen d results
+
+```
+
+Mean stem mass (g) for the reference watershed in 2003 (`r maple_table$mean_stem_mass[1]` $\pm$ `r maple_table$sd_stem_mass[1]`) was found to be significantly lower than mean stem mass (g) from the calcium treated watershed (`r maple_table$mean_stem_mass[3]` $\pm$ `r maple_table$sd_stem_mass[3]`) (mean $\pm$ 1 standard deviation) (Welch t-test: t(`r round(mass_ttest$parameter, 1)`) = `r round(mass_ttest$statistic, 3)`; *p* = `r ifelse(mass_ttest$p.value < 0.001, paste("< 0.001"), paste("=", mass_ttest$p.value))`). Cohen's *d* was also used to assess effect size which incorporates the sample size for each watershed (Cohen's *d* = `r round(mass_cohen_d$estimate, 2)`). Since the effect size was large, it is likely that a practical difference exists between the stem mass of the two watersheds, with the stems from the calcium treated watershed larger on average. 
+
+In this experiment, the addition of calcium in the treated watershed appeared on average to improve sugar maple seedling growth as compared to the acid-rain impacted (reference) watershed. While this does not *prove* that calcium additions increased the sugar maple growth patterns, the results indicated substantially larger stem mass with the calcium additions in this experiment. 
+
+
+### Citations
+
+Juice, S. and T. Fahey. 2019. Health and mycorrhizal colonization response of sugar maple (Acer saccharum) seedlings to calcium addition in Watershed 1 at the Hubbard Brook Experimental Forest ver 3. Environmental Data Initiative. https://doi.org/10.6073/pasta/0ade53ede9a916a36962799b2407097e 
+
+R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
+
+Torchiano M (2020). effsize: Efficient Effect Size Computation. doi:
+10.5281/zenodo.1480624 (URL: https://doi.org/10.5281/zenodo.1480624), R package
+version 0.8.1, <URL: https://CRAN.R-project.org/package=effsize>.
+
+Wickham, H. et al., (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686, https://doi.org/10.21105/joss.01686
+
+Zhu, H. (2021). kableExtra: Construct Complex Table with 'kable' and Pipe Syntax. R package version 1.3.4. https://CRAN.R-project.org/package=kableExtra
+
+
