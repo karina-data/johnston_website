@@ -1,15 +1,15 @@
 ---
 title: "Welcome"
 description: |
-  This is a brief introduction post.
+  This is a brief introduction post to my portfolio blog. It will help orient you to the portfolio and website.
 author:
   - name: Karina Johnston
-date: 2022-02-10
+date: 2022-03-13
 output:
   distill::distill_article:
     self_contained: false
 ---
 
-Welcome to my website! Thank you for visiting. Within this website, you will find some summary professional information about me, as well as a copy of my CV, and portfolio examples of my work in the field of ecology, marine science, coastal resilience, and burgeoning data science. While this site is focused on the presentation of data science and coding materials, there are also several examples of restoration ecology and implementation of restoration projects, including wetlands, beaches, and dunes.
+Welcome to my website! Thank you for visiting. Within this website, you will find some summary professional information about me, as well as a copy of my CV, and portfolio examples of my work in the field of ecology, marine science, coastal resilience, and burgeoning data science. While this site is focused on the presentation of data science and coding materials, there are also several examples of restoration ecology and implementation of restoration projects, including wetlands, beaches, and dunes. There is also a page called "Data Visualizations" to showcase several static figures from past reports. 
 
 Please don't hesitate to reach out to me for more information. Enjoy! 
